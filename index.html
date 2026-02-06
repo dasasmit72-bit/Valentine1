@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Rose Day 🌹</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{
+ margin:0;height:100vh;overflow:hidden;
+ background:radial-gradient(circle,#1a0b10,#000);
+ color:white;font-family:Poppins,sans-serif;
+ display:flex;align-items:center;justify-content:center;
+}
+.scene{text-align:center;animation:slide 1s ease forwards}
+@keyframes slide{from{opacity:0;transform:translateX(60px)}to{opacity:1}}
+.petal{position:absolute;font-size:1.4rem;animation:fall linear infinite}
+@keyframes fall{0%{top:-10%}100%{top:110%}}
+.hint{opacity:.6;margin-top:20px}
+</style>
+</head>
+
+<body>
+<div class="scene">
+<h1>Happy Rose Day 🌹</h1>
+<p>Some feelings bloom silently</p>
+<div class="hint">👉 tap / swipe to begin</div>
+</div>
+
+<script>
+// 🌹 Falling petals
+for(let i=0;i<35;i++){
+ let p=document.createElement("div");
+ p.className="petal"; p.innerText="🌹";
+ p.style.left=Math.random()*100+"vw";
+ p.style.animationDuration=6+Math.random()*6+"s";
+ document.body.appendChild(p);
+}
+
+// 🎵 Ambient music (generated)
+function playMusic(){
+ if(localStorage.getItem("music")==="on") return;
+ const ctx=new (window.AudioContext||window.webkitAudioContext)();
+ const osc=ctx.createOscillator();
+ const gain=ctx.createGain();
+ osc.type="sine";
+ osc.frequency.value=220;
+ gain.gain.value=0.03;
+ osc.connect(gain); gain.connect(ctx.destination);
+ osc.start();
+ localStorage.setItem("music","on");
+}
+
+// 👉 navigation
+function next(){ location.href="page1.html"; }
+
+let sx=0,ex=0;
+addEventListener("touchstart",e=>{sx=e.touches[0].screenX; playMusic();});
+addEventListener("touchend",e=>{ex=e.changedTouches[0].screenX;if(sx-ex>50)next();});
+addEventListener("click",()=>{playMusic(); next();});
+addEventListener("keydown",e=>{if(e.key==="ArrowRight")next();});
+</script>
+</body>
+</html>
