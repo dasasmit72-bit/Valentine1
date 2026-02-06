@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Message 🌹</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{
+ margin:0;height:100vh;background:linear-gradient(#12060b,#000);
+ color:white;font-family:Poppins;
+ display:flex;align-items:center;justify-content:center;
+}
+.box{text-align:center;max-width:80%;animation:fade 1.2s}
+@keyframes fade{from{opacity:0;transform:translateY(30px)}to{opacity:1}}
+.petal{position:absolute;font-size:1.2rem;animation:fall linear infinite}
+@keyframes fall{0%{top:-10%}100%{top:110%}}
+</style>
+</head>
+
+<body>
+<div class="box">
+<h2>🌹</h2>
+<p>
+Not everything needs a reason.<br>
+Some things just feel right.
+</p>
+<p style="opacity:.6">👉 swipe</p>
+</div>
+
+<script>
+for(let i=0;i<25;i++){
+ let p=document.createElement("div");
+ p.className="petal"; p.innerText="🌹";
+ p.style.left=Math.random()*100+"vw";
+ p.style.animationDuration=6+Math.random()*5+"s";
+ document.body.appendChild(p);
+}
+function next(){location.href="page3.html";}
+let sx=0,ex=0;
+addEventListener("touchstart",e=>sx=e.touches[0].screenX);
+addEventListener("touchend",e=>{ex=e.changedTouches[0].screenX;if(sx-ex>50)next();});
+</script>
+</body>
+</html>
