@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Roses 🎁</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{margin:0;background:#0b0407;color:white;font-family:Poppins;overflow:hidden}
+.scene{padding:40px;text-align:center;animation:slide 1s ease}
+@keyframes slide{from{opacity:0;transform:translateX(60px)}to{opacity:1}}
+.gift{
+ background:#ff4d6d;padding:30px;margin:20px auto;
+ width:70%;border-radius:20px;font-size:2rem;cursor:pointer;
+ transition:.4s;
+}
+.gift.open{background:#111;font-size:1.1rem}
+.petal{position:absolute;font-size:1.3rem;animation:fall linear infinite}
+@keyframes fall{0%{top:-10%}100%{top:110%}}
+</style>
+</head>
+
+<body>
+<div class="scene">
+<h2>Tap the Gifts 🌹</h2>
+
+<div class="gift" onclick="openGift(this,'🌹 Soft moments stay forever')">🎁</div>
+<div class="gift" onclick="openGift(this,'🌹 Care needs no words')">🎁</div>
+<div class="gift" onclick="openGift(this,'🌹 Silence can be warm')">🎁</div>
+
+<p style="opacity:.6">👈 swipe | swipe 👉</p>
+</div>
+
+<script>
+function openGift(el,text){
+ el.classList.add("open");
+ el.innerText=text;
+}
+
+for(let i=0;i<30;i++){
+ let p=document.createElement("div");
+ p.className="petal"; p.innerText="🌹";
+ p.style.left=Math.random()*100+"vw";
+ p.style.animationDuration=5+Math.random()*6+"s";
+ document.body.appendChild(p);
+}
+
+function next(){location.href="page2.html";}
+function prev(){location.href="index.html";}
+let sx=0,ex=0;
+addEventListener("touchstart",e=>sx=e.touches[0].screenX);
+addEventListener("touchend",e=>{
+ ex=e.changedTouches[0].screenX;
+ if(sx-ex>50)next();
+ if(ex-sx>50)prev();
+});
+</script>
+</body>
+</html>
